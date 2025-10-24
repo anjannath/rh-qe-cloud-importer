@@ -36,6 +36,8 @@ var (
 	paramImageIdDesc       = "Image name to be replicated"
 	paramTargetRegions     = "region"
 	paramTargetRegionsDesc = "target region ('all' to replicate across all regions)"
+	paramArch              = "arch"
+	paramArchDesc          = "image arch (x86_64 or arm64)"
 )
 
 func aws() *cobra.Command {
@@ -53,6 +55,7 @@ func aws() *cobra.Command {
 					DebugLevel: viper.GetUint(params.DebugLevel),
 				},
 				viper.GetString(paramImageId),
+				viper.GetString(paramArch),
 				viper.GetStringSlice(paramTargetRegions),
 				manager.AWS); err != nil {
 				return err
@@ -63,6 +66,7 @@ func aws() *cobra.Command {
 	flagSet := pflag.NewFlagSet(awsCMD, pflag.ExitOnError)
 	flagSet.StringP(paramImageId, "", "", paramImageIdDesc)
 	flagSet.StringSliceP(paramTargetRegions, "", []string{}, paramTargetRegionsDesc)
+	flagSet.String(paramArch, "x86_64", paramArchDesc)
 	c.PersistentFlags().AddFlagSet(flagSet)
 	return c
 }
@@ -82,6 +86,7 @@ func azure() *cobra.Command {
 					DebugLevel: viper.GetUint(params.DebugLevel),
 				},
 				viper.GetString(paramImageId),
+				viper.GetString(paramArch),
 				viper.GetStringSlice(paramTargetRegions),
 				manager.AZURE); err != nil {
 				return err
@@ -92,6 +97,7 @@ func azure() *cobra.Command {
 	flagSet := pflag.NewFlagSet(azureCMD, pflag.ExitOnError)
 	flagSet.StringP(paramImageId, "", "", paramImageIdDesc)
 	flagSet.StringSliceP(paramTargetRegions, "", []string{}, paramTargetRegionsDesc)
+	flagSet.String(paramArch, "x86_64", paramArchDesc)
 	c.PersistentFlags().AddFlagSet(flagSet)
 	return c
 }

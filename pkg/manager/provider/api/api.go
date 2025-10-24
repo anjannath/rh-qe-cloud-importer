@@ -22,6 +22,6 @@ type Provider interface {
 	RHELAI(rawImageFilePath, amiName string) (pulumi.RunFunc, error)
 	Share(imageID string, arch, targetAccountID, organizationARN string) (pulumi.RunFunc, []string, error)
 	OpenshiftLocal(bundleURL, shasumURL, arch string, targeRegions []string) (pulumi.RunFunc, error)
-	Replicate(amiName string, targetRegions []string) (pulumi.RunFunc, []string, error)
+	Replicate(amiName, amiArch string, targetRegions []string) (pulumi.RunFunc, []string, error)
 	GetProviderCredentials(customCreds map[string]string) credentials.ProviderCredentials
 }

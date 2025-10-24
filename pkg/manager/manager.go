@@ -141,7 +141,7 @@ func ShareImage(ctx *context.ContextArgs,
 	return nil
 }
 
-func ReplicateImage(ctx *context.ContextArgs, imageID string, targetRegions []string, provider Provider) error {
+func ReplicateImage(ctx *context.ContextArgs, imageID, imageArch string, targetRegions []string, provider Provider) error {
 	// Initialize context
 	context.Init(ctx)
 	// Get provider
@@ -152,7 +152,7 @@ func ReplicateImage(ctx *context.ContextArgs, imageID string, targetRegions []st
 		return err
 	}
 
-	replicateFunc, regions, err := p.Replicate(imageID, targetRegions)
+	replicateFunc, regions, err := p.Replicate(imageID, imageArch, targetRegions)
 	if err != nil {
 		return err
 	}

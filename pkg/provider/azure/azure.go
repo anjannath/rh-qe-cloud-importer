@@ -50,7 +50,7 @@ func (p *azureProvider) OpenshiftLocal(bundleURL, shasumURL, arch string, region
 	return ocpReq.runFunc, nil
 }
 
-func (p *azureProvider) Replicate(amiName string, targetRegions []string) (pulumi.RunFunc, []string, error) {
+func (p *azureProvider) Replicate(amiName string, _ string, targetRegions []string) (pulumi.RunFunc, []string, error) {
 	var availableRegions []string
 	var err error
 
